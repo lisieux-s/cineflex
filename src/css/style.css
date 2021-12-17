@@ -13,3 +13,9 @@ p {
 
     margin-top: 51px;
 }
+
+img {
+    width: 129px;
+    height: 193px;
+    object-fit: cover;
+}
