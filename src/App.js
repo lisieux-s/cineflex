@@ -4,14 +4,14 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Home from './components/Home';
-import Movies from './components/Movies';
-import Sessions from './components/Sessions';
+import Movie from './components/Movie';
+import Session from './components/Session';
 import Success from './components/Success';
-import Selection from './components/Selection';
+import Footer from './components/Footer';
 
 export default function App() {
-  const [idMovie, setIdMovie] = useState('0');
-  const [idSession, setIdSession] = useState('0');
+  const [idFilme, setIdFilme] = useState('0');
+  const [idSessao, setIdSessao] = useState('0');
   return (
     <>
       <Header>CINEFLEX</Header>
@@ -19,8 +19,8 @@ export default function App() {
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/filme/{idMovie}' element={<Movies />} />
-            <Route path='/sessao/{idSession}' element={<Sessions />} />
+            <Route path='sessoes/:idFilme' element={<Movie />} />
+            <Route path='/assentos/:idSessao' element={<Session />} />
             <Route path='/success' element={<Success />} />
           </Routes>
         </BrowserRouter>
