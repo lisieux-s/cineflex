@@ -4,8 +4,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Home from './components/Home';
-import Movie from './components/Movie';
-import Session from './components/Session';
+import Sessions from './components/Sessions';
+import Seats from './components/Seats';
 import Success from './components/Success';
 import Footer from './components/Footer';
 
@@ -19,8 +19,8 @@ export default function App() {
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<Home />} />
-            <Route path='/sessoes/:idFilme' element={<Movie />} />
-            <Route path='/assentos/:idSessao' element={<Session />} />
+            <Route path='/sessoes/:idFilme' element={<Sessions />} />
+            <Route path='/assentos/:idSessao' element={<Seats />} />
             <Route path='/success' element={<Success />} />
           </Routes>
         </BrowserRouter>

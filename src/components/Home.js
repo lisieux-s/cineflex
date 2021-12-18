@@ -1,23 +1,22 @@
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+
+import Movie from './Movie';
 
 export default function Home() {
+  const [movies, setMovies] = useState([]);
+  const pMovies = axios.get(
+    'https://mock-api.driven.com.br/api/v4/cineflex/movies'
+  );
+  pMovies.then((res) => {
+    setMovies(res.data);
+  });
   return (
     <div>
       <p>Selecione o filme</p>
       <Container>
-        <Link to='/sessoes/:idFilme'>
-          <div>
-            {' '}
-            <img />{' '}
-          </div>
-        </Link>
-        <Link to='/sessoes/:idFilme'>
-          <div>
-            {' '}
-            <img />{' '}
-          </div>
-        </Link>
+        {movies.map(movie => Movie(movie))}
       </Container>
     </div>
   );
