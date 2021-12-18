@@ -1,20 +1,15 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Sessions() {
+  const [sessions, setSessions] = useState(null)
+  useEffect(() => {
+    const pSessions = axios.get('https://mock-api.driven.com.br/api/v4/cineflex/movies/ID_DO_FILME/showtimes')
+  })
   return (
     <div>
       <p>Selecione o horário</p>
       <Container>
-        <div>
-          <p>horario horario horario</p>
-          <Link to='/assentos/:idSessao'>
-            <button>hh:mm</button>
-          </Link>
-          <Link to='/assentos/:idSessao'>
-            <button>hh:mm</button>
-          </Link>
-        </div>
+        
       </Container>
     </div>
   );

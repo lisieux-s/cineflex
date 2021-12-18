@@ -5,13 +5,18 @@ import axios from 'axios';
 import Movie from './Movie';
 
 export default function Home() {
-  const [movies, setMovies] = useState([]);
-  const pMovies = axios.get(
-    'https://mock-api.driven.com.br/api/v4/cineflex/movies'
-  );
-  pMovies.then((res) => {
-    setMovies(res.data);
+  const [movies, setMovies] = useState(null);
+  useEffect(() => {
+    const pMovies = axios.get(
+      'https://mock-api.driven.com.br/api/v4/cineflex/movies'
+    );
+    pMovies.then((res) => {
+      setMovies(res.data);
+    });
   });
+  if(movies === null) {
+    return(<Loading src='https://acegif.com/wp-content/uploads/loading-37.gif' />)
+  }
   return (
     <div>
       <p>Selecione o filme</p>
@@ -43,4 +48,13 @@ const Container = styled.div`
 
     text-decoration: none;
   }
+
+  img {
+    width: 129px;
+    height: 193px;
+    object-fit: cover;
+}
 `;
+const Loading = styled.img`
+  width: auto;
+`

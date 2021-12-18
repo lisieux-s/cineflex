@@ -33,6 +33,7 @@ const Header = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: fixed;
 
   height: 67px;
   width: 100%;
@@ -48,4 +49,5 @@ const Page = styled.div`
   align-items: center;
 
   padding: 23px;
+  padding-top: 67px;
 `;
