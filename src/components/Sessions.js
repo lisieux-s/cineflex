@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import axios from 'axios';
 
 import Session from './Session';
+import Footer from './Footer';
+
 export default function Sessions(ID_DO_FILME = 1) {
   const [sessions, setSessions] = useState(null);
   useEffect(() => {
@@ -22,19 +24,19 @@ export default function Sessions(ID_DO_FILME = 1) {
       <Container>
         {sessions.days.map((session) => Session(session))}
       </Container>
+      <Footer />
     </div>
   );
 }
-
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
 
-  margin-top: 51px;
   p {
     font-size: 20px;
+    text-align: left;
+    padding-bottom: 22px;
   }
   button {
     width: 82px;

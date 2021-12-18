@@ -46,7 +46,6 @@ const Header = styled.header`
 const Page = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
 
   padding: 23px;
   padding-top: 67px;
