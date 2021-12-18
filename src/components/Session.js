@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import Showtime from "./Showtime";
 
 //buscar props do array days do objeto de id 1
