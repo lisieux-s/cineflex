@@ -14,15 +14,15 @@ export default function Home() {
       setMovies(res.data);
     });
   });
-  if(movies === null) {
-    return(<Loading src='https://acegif.com/wp-content/uploads/loading-37.gif' />)
+  if (movies === null) {
+    return (
+      <Loading src="https://acegif.com/wp-content/uploads/loading-37.gif" />
+    );
   }
   return (
     <div>
       <p>Selecione o filme</p>
-      <Container>
-        {movies.map(movie => Movie(movie))}
-      </Container>
+      <Container>{movies.map((movie) => Movie(movie))}</Container>
     </div>
   );
 }
@@ -53,8 +53,9 @@ const Container = styled.div`
     width: 129px;
     height: 193px;
     object-fit: cover;
-}
+  }
+  
 `;
 const Loading = styled.img`
-  width: auto;
-`
+  width: 64px;
+`;

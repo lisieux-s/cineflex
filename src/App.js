@@ -7,11 +7,8 @@ import Home from './components/Home';
 import Sessions from './components/Sessions';
 import Seats from './components/Seats';
 import Success from './components/Success';
-import Footer from './components/Footer';
 
 export default function App() {
-  const [idFilme, setIdFilme] = useState('0');
-  const [idSessao, setIdSessao] = useState('0');
   return (
     <>
       <Header>CINEFLEX</Header>

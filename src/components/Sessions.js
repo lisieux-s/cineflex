@@ -1,18 +1,23 @@
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 
 import Session from './Session';
 import Footer from './Footer';
 
-export default function Sessions(ID_DO_FILME = 1) {
+export default function Sessions() {
   const [sessions, setSessions] = useState(null);
+  const [posterURL, setPosterURL] = useState(null)
+  const { idFilme } = useParams();
+
   useEffect(() => {
     const pSessions = axios.get(
-      'https://mock-api.driven.com.br/api/v4/cineflex/movies/'+1+'/showtimes'
+      'https://mock-api.driven.com.br/api/v4/cineflex/movies/'+idFilme+'/showtimes'
     );
     pSessions.then((res) => {
       setSessions(res.data);
+      setPosterURL(res.data.posterURL);
     });
   });
   if(sessions === null) {
@@ -24,7 +29,7 @@ export default function Sessions(ID_DO_FILME = 1) {
       <Container>
         {sessions.days.map((session) => Session(session))}
       </Container>
-      <Footer />
+      <Footer posterURL={posterURL}/>
     </div>
   );
 }
@@ -51,5 +56,5 @@ const Container = styled.div`
   }
 `;
 const Loading = styled.img`
-  width: auto;
+  width: 64px;
 `
