@@ -13,10 +13,10 @@ export default function Home() {
     pMovies.then((res) => {
       setMovies(res.data);
     });
-  });
+  }, []);
   if (movies === null) {
     return (
-      <Loading src="https://acegif.com/wp-content/uploads/loading-37.gif" />
+      <Loading src='https://acegif.com/wp-content/uploads/loading-37.gif' />
     );
   }
   return (
@@ -54,7 +54,6 @@ const Container = styled.div`
     height: 193px;
     object-fit: cover;
   }
-  
 `;
 const Loading = styled.img`
   width: 64px;

@@ -8,47 +8,56 @@ import styled from 'styled-components';
 import Seat from './Seat';
 
 export default function Seats() {
-  const [seats, setSeats] = useState(null);
+  const [session, setSession] = useState(null);
+  const [seats, setSeats] = useState(null)
   const { idSessao } = useParams();
   useEffect(() => {
-    const pSeats = axios.get(
+    const pSession = axios.get(
       'https://mock-api.driven.com.br/api/v4/cineflex/showtimes/' +
         idSessao +
         '/seats'
     );
-    pSeats.then((res) => {
-      setSeats(res.data);
+    pSession.then((res) => {
+      setSession(res.data);
+      setSeats(session.data);
     });
-  });
+  }, []);
+  if (session === null) {
+    return (
+      <Loading src='https://acegif.com/wp-content/uploads/loading-37.gif' />
+    );
+  }
   return (
     <div>
       <p>Selecione o(s) assento(s)</p>
-      <Room>
-        <Seat name='{seats.seats[0].name}' />
-          
+      <Room>{
+        seats === null? '' : seats.map((seat) => Seat(seat))
+      }
       </Room>
-        <Captions>
-          <div>
-            <Seat isAvailable='true' selected='true'/>
-            Selecionado
-          </div>
-          <div>
-            <Seat isAvailable='true' selected='false'/>
-            Disponível
-          </div>
-          <div>
-            <Seat isAvailable='false' selected='false' />
-            Indisponível
-          </div>
-        </Captions>
-      
+      <Captions>
+        <div>
+          <Seat isAvailable='true' selected='true' />
+          Selecionado
+        </div>
+        <div>
+          <Seat isAvailable='true' selected='false' />
+          Disponível
+        </div>
+        <div>
+          <Seat isAvailable='false' selected='false' />
+          Indisponível
+        </div>
+      </Captions>
+
       <Container>
         <p>Nome do comprador:</p>
-        <input placeholder="Digite seu nome..."></input>
+        <input placeholder='Digite seu nome...'></input>
         <p>CPF do comprador:</p>
-        <input placeholder="Digite seu CPF..."></input>
+        <input placeholder='Digite seu CPF...'></input>
 
-        <button>Reservar assento(s)</button>
+        <Link to='/'>
+          <button>Reservar assento(s)</button>
+        </Link>
       </Container>
     </div>
   );
@@ -88,10 +97,13 @@ const Captions = styled.div`
     flex-direction: column;
     align-items: center;
   }
-`
+`;
 
 const Room = styled.div`
   display: flex;
   width: 100px;
   margin: 0 auto;
-`
+`;
+const Loading = styled.img`
+  width: 64px;
+`;
