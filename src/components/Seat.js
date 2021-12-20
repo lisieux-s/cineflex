@@ -27,8 +27,8 @@ export default function Seat(props) {
 
   return (
     <Container
-      onClick={(e) => {
-        e.stopPropagation();
+      onClick={() => {
+        
         if (isAvailable === true) {
           isSelected ? setIsSelected(false) : setIsSelected(true);
         } else {
