@@ -8,7 +8,7 @@ import Footer from './Footer';
 
 export default function Sessions() {
   const [sessions, setSessions] = useState(null);
-  const [posterURL, setPosterURL] = useState(null)
+  const [posterURL, setPosterURL] = useState(null);
   const { idFilme } = useParams();
 
   useEffect(() => {
