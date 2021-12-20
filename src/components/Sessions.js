@@ -14,24 +14,26 @@ export default function Sessions() {
 
   useEffect(() => {
     const pSessions = axios.get(
-      'https://mock-api.driven.com.br/api/v4/cineflex/movies/'+idFilme+'/showtimes'
+      'https://mock-api.driven.com.br/api/v4/cineflex/movies/' +
+        idFilme +
+        '/showtimes'
     );
     pSessions.then((res) => {
       setSessions(res.data);
       setPosterURL(sessions.posterURL);
-      setTitle(sessions.title)
+      setTitle(sessions.title);
     });
-  }), [];
-  if(sessions === null) {
-    return(<Loading src='https://acegif.com/wp-content/uploads/loading-37.gif' />)
+  }, [sessions, idFilme]);
+  if (sessions === null) {
+    return (
+      <Loading src='https://acegif.com/wp-content/uploads/loading-37.gif' />
+    );
   }
   return (
     <div>
       <p>Selecione o horário</p>
-      <Container>
-        {sessions.days.map((session) => Session(session))}
-      </Container>
-      <Footer posterURL={posterURL} title={title}/>
+      <Container>{sessions.days.map((session) => Session(session))}</Container>
+      <Footer posterURL={posterURL} title={title} />
     </div>
   );
 }
@@ -59,4 +61,5 @@ const Container = styled.div`
 `;
 const Loading = styled.img`
   width: 64px;
-`
+  margin: 50vh auto;
+`;

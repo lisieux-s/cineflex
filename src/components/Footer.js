@@ -1,12 +1,10 @@
-import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 
 export default function Footer(props) {
   return (
     <FooterContainer>
         <div>
-          <img src={props.posterURL}/>
+          <img src={props.posterURL} alt='poster'/>
         </div>
       {
           //Verificar qual é a página

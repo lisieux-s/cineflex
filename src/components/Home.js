@@ -57,4 +57,5 @@ const Container = styled.div`
 `;
 const Loading = styled.img`
   width: 64px;
+  margin: 50vh auto;
 `;

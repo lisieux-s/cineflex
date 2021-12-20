@@ -21,7 +21,7 @@ export default function Seats() {
       setSession(res.data);
       setSeats(session.data);
     });
-  }, []);
+  }, [session, idSessao]);
   if (session === null) {
     return (
       <Loading src='https://acegif.com/wp-content/uploads/loading-37.gif' />
