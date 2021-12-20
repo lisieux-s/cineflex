@@ -9,6 +9,7 @@ import Footer from './Footer';
 export default function Sessions() {
   const [sessions, setSessions] = useState(null);
   const [posterURL, setPosterURL] = useState(null);
+  const [title, setTitle] = useState(null);
   const { idFilme } = useParams();
 
   useEffect(() => {
@@ -17,9 +18,10 @@ export default function Sessions() {
     );
     pSessions.then((res) => {
       setSessions(res.data);
-      setPosterURL(res.data.posterURL);
+      setPosterURL(sessions.posterURL);
+      setTitle(sessions.title)
     });
-  });
+  }), [];
   if(sessions === null) {
     return(<Loading src='https://acegif.com/wp-content/uploads/loading-37.gif' />)
   }
@@ -29,7 +31,7 @@ export default function Sessions() {
       <Container>
         {sessions.days.map((session) => Session(session))}
       </Container>
-      <Footer posterURL={posterURL}/>
+      <Footer posterURL={posterURL} title={title}/>
     </div>
   );
 }

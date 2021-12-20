@@ -6,7 +6,7 @@ export default function Footer(props) {
   return (
     <FooterContainer>
         <div>
-          <img url={props.posterURL}/>
+          <img src={props.posterURL}/>
         </div>
       {
           //Verificar qual é a página
@@ -14,7 +14,7 @@ export default function Footer(props) {
             //para a página Seats, inserir filme e sessão
       }
         <span>
-            <p>filme</p>
+            <p>{props.title}</p>
         </span>
     </FooterContainer>
   );
@@ -50,11 +50,12 @@ const FooterContainer = styled.div`
       }
   }
   span {
-      background: pink;
       align-self: center;
       p {
           align-self: center;
           justify-self: center;
+          padding: 0;
+          margin: 0;
       }
   }
 `;
