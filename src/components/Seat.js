@@ -2,18 +2,17 @@ import { useState, useEffect } from 'react';
 
 import styled from 'styled-components';
 
-
 export default function Seat(props) {
   const [isAvailable, setIsAvailable] = useState(true);
   const [isSelected, setIsSelected] = useState(false);
   const [color, setColor] = useState('#C3CFD9');
   const [border, setBorder] = useState('#7B8B99');
 
-  if (props.isAvailable === false) {
-    setIsAvailable(false);
+  useEffect(() => {
+    setIsAvailable(props.isAvailable);
     setColor('#FBE192');
     setBorder('#F7C52B');
-  }
+  }, [props.isAvailable]);
 
   const Container = styled.button`
     width: 26px;
@@ -28,11 +27,10 @@ export default function Seat(props) {
   return (
     <Container
       onClick={() => {
-        
         if (isAvailable === true) {
           isSelected ? setIsSelected(false) : setIsSelected(true);
         } else {
-            alert("Esse assento não está disponível");
+          alert('Esse assento não está disponível');
         }
         if (isSelected === true) {
           setColor('#8DD7CF');
@@ -44,4 +42,3 @@ export default function Seat(props) {
     </Container>
   );
 }
-

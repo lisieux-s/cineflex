@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-export default function(props) {
+export default function Movie(props) {
     return(
         <Link to={'/sessoes/' + props.id}>
           <div>

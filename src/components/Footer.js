@@ -7,13 +7,17 @@ export default function Footer(props) {
           <img src={props.posterURL} alt='poster'/>
         </div>
       {
-          //Verificar qual é a página
-            //para a página Sessions, inserir filme
-            //para a página Seats, inserir filme e sessão
+          props.weekday === null ? 
+          <span>
+              <p>{props.title}</p>
+          </span>
+          :
+          <span>
+              <p>{props.title}</p>
+              <p>{props.weekday} {props.name}</p>
+          </span>
       }
-        <span>
-            <p>{props.title}</p>
-        </span>
+        
     </FooterContainer>
   );
 }

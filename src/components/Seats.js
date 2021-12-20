@@ -6,10 +6,16 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 import Seat from './Seat';
+import Footer from './Footer';
 
 export default function Seats() {
-  const [session, setSession] = useState(null);
-  const [seats, setSeats] = useState(null)
+  const [session, setSession] = useState([]);
+  const [seats, setSeats] = useState([]);
+
+  const [ids, setIDS] = useState(null);
+  const [customer, setCustomer] = useState(null);
+  const [cpf, setCpf] = useState(null)
+
   const { idSessao } = useParams();
   useEffect(() => {
     const pSession = axios.get(
@@ -19,9 +25,21 @@ export default function Seats() {
     );
     pSession.then((res) => {
       setSession(res.data);
-      setSeats(session.data);
+      setSeats(res.data.seats);
+      
     });
   }, [session, idSessao]);
+
+  function reserveSeats() {
+    axios.post('https://mock-api.driven.com.br/api/v4/cineflex/seats/book-many',
+      {
+        ids,
+        customer,
+        cpf
+      })
+  }
+  
+
   if (session === null) {
     return (
       <Loading src='https://acegif.com/wp-content/uploads/loading-37.gif' />
@@ -56,9 +74,15 @@ export default function Seats() {
         <input placeholder='Digite seu CPF...'></input>
 
         <Link to='/'>
-          <button>Reservar assento(s)</button>
+          <button onClick={() => reserveSeats()}>Reservar assento(s)</button>
         </Link>
       </Container>
+      <Footer 
+      posterURL={session.posterURL} 
+      title={session.title} 
+      weekday={session.day.weekday} 
+      date={session.name}/>
+
     </div>
   );
 }
@@ -106,4 +130,5 @@ const Room = styled.div`
 `;
 const Loading = styled.img`
   width: 64px;
+  margin: 50vh auto;
 `;

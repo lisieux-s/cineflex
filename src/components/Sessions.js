@@ -20,8 +20,8 @@ export default function Sessions() {
     );
     pSessions.then((res) => {
       setSessions(res.data);
-      setPosterURL(sessions.posterURL);
-      setTitle(sessions.title);
+      setPosterURL(res.data.posterURL);
+      setTitle(res.data.title);
     });
   }, [sessions, idFilme]);
   if (sessions === null) {
