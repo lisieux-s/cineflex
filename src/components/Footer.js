@@ -14,7 +14,7 @@ export default function Footer(props) {
           :
           <span>
               <p>{props.title}</p>
-              <p>{props.weekday} {props.name}</p>
+              <p>{props.weekday} {props.date}</p>
           </span>
       }
         
@@ -52,10 +52,9 @@ const FooterContainer = styled.div`
       }
   }
   span {
-      align-self: center;
+
       p {
-          align-self: center;
-          justify-self: center;
+        justify-self: flex-start;
           padding: 0;
           margin: 0;
       }

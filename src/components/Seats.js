@@ -9,14 +9,15 @@ import Seat from './Seat';
 import Footer from './Footer';
 
 export default function Seats() {
-  const [session, setSession] = useState([]);
-  const [seats, setSeats] = useState([]);
+  const [session, setSession] = useState(null);
+  const [seats, setSeats] = useState(null);
 
   const [ids, setIDS] = useState(null);
   const [customer, setCustomer] = useState(null);
   const [cpf, setCpf] = useState(null)
 
   const { idSessao } = useParams();
+
   useEffect(() => {
     const pSession = axios.get(
       'https://mock-api.driven.com.br/api/v4/cineflex/showtimes/' +
@@ -28,7 +29,7 @@ export default function Seats() {
       setSeats(res.data.seats);
       
     });
-  }, [session, idSessao]);
+  }, []);
 
   function reserveSeats() {
     axios.post('https://mock-api.driven.com.br/api/v4/cineflex/seats/book-many',
@@ -40,7 +41,7 @@ export default function Seats() {
   }
   
 
-  if (session === null) {
+  if (!session) {
     return (
       <Loading src='https://acegif.com/wp-content/uploads/loading-37.gif' />
     );
@@ -49,7 +50,7 @@ export default function Seats() {
     <div>
       <p>Selecione o(s) assento(s)</p>
       <Room>{
-        seats === null? '' : seats.map((seat) => Seat(seat))
+        seats && seats.map((seat) => <Seat {...seat}/>)
       }
       </Room>
       <Captions>
@@ -78,8 +79,8 @@ export default function Seats() {
         </Link>
       </Container>
       <Footer 
-      posterURL={session.posterURL} 
-      title={session.title} 
+      posterURL={session.movie.posterURL} 
+      title={session.movie.title} 
       weekday={session.day.weekday} 
       date={session.name}/>
 
@@ -91,13 +92,16 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   p {
     font-size: 18px;
     margin: 0;
+    align-self: flex-start;
   }
   input {
     font-style: italic;
+    align-self: flex-start;
+
   }
   button {
     width: 225px;
@@ -107,14 +111,14 @@ const Container = styled.div`
     background: #e8833a;
     color: #fff;
 
-    align-self: center;
     margin: 57px;
   }
 `;
 const Captions = styled.div`
   display: flex;
-  justify-content: space-around;
-  align-items: items;
+  justify-content: center;
+  gap: 50px;
+  margin-bottom: 50px;
 
   div {
     display: flex;
@@ -125,7 +129,8 @@ const Captions = styled.div`
 
 const Room = styled.div`
   display: flex;
-  width: 100px;
+  flex-wrap: wrap;
+  width: 450px;
   margin: 0 auto;
 `;
 const Loading = styled.img`

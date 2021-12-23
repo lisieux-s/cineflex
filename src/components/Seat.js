@@ -3,42 +3,45 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 export default function Seat(props) {
+  //usar ternarios para que cor dependa de available e selected
   const [isAvailable, setIsAvailable] = useState(true);
   const [isSelected, setIsSelected] = useState(false);
-  const [color, setColor] = useState('#C3CFD9');
-  const [border, setBorder] = useState('#7B8B99');
 
   useEffect(() => {
     setIsAvailable(props.isAvailable);
-    setColor('#FBE192');
-    setBorder('#F7C52B');
-  }, [props.isAvailable]);
-
-  const Container = styled.button`
-    width: 26px;
-    height: 26px;
-    background: ${color};
-    border: 1px solid ${border};
-    box-sizing: border-box;
-    border-radius: 12px;
-    margin: 8px;
-  `;
+  }, []);
 
   return (
     <Container
       onClick={() => {
-        if (isAvailable === true) {
-          isSelected ? setIsSelected(false) : setIsSelected(true);
+        if (isAvailable) {
+          setIsSelected(!isSelected);
         } else {
-          alert('Esse assento não está disponível');
-        }
-        if (isSelected === true) {
-          setColor('#8DD7CF');
-          setBorder('#1AAE9E');
+          alert("Esse assento não está disponível");
         }
       }}
+      //isso permite que Container acesse essas props
+      isSelected={isSelected}
+      isAvailable={isAvailable}
     >
       {props.name}
     </Container>
   );
 }
+
+const Container = styled.button`
+display: flex;
+justify-content: center;
+align-items: center;
+  width: 26px;
+  height: 26px;
+  background: 
+    ${(props) =>
+    props.isSelected ? "#8DD7CF" : props.isAvailable ? "#C3CFD9" : "#FBE192"};
+  border: 1px solid
+    ${(props) =>
+      props.isSelected ? "#45BDB0" : props.isAvailable ? "#808F9D" : "#F7C52B"};
+  box-sizing: border-box;
+  border-radius: 12px;
+  margin: 8px;
+`;
