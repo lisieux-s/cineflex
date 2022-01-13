@@ -3,19 +3,18 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 export default function Seat(props) {
-  //usar ternarios para que cor dependa de available e selected
   const [isAvailable, setIsAvailable] = useState(true);
   const [isSelected, setIsSelected] = useState(false);
 
   useEffect(() => {
     setIsAvailable(props.isAvailable);
   }, []);
-
   return (
     <Container
       onClick={() => {
         if (isAvailable) {
           setIsSelected(!isSelected);
+          props.setSelectedSeats([...props.selectedSeats, props.id])
         } else {
           alert("Esse assento não está disponível");
         }
