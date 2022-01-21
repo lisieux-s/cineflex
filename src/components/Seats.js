@@ -48,7 +48,7 @@ export default function Seats() {
     pSend.then((res) => navigate('/success', {
       state: {
         endPage: {
-
+          
           name: name,
           cpf: cpf,
           session: session,
